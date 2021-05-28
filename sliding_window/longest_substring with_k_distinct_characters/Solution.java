@@ -86,7 +86,7 @@ public class Solution {
                 if(freq == 1) {
                     map.remove(s.charAt(i));
                 } else {
-                    map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) - 1);
+                    map.put(s.charAt(i), freq - 1);
                 }
                 i++;
             }
