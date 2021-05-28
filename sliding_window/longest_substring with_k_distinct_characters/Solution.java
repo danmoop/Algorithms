@@ -54,36 +54,43 @@ public class Solution {
 
     /*
         Given a string, find the length of the longest substring in it with no more than K distinct characters.
-
+    
         Example 1:
-
         Input: String="araaci", K=2
         Output: 4
         Explanation: The longest substring with no more than '2' distinct characters is "araa".
+    
         Example 2:
-
         Input: String="araaci", K=1
         Output: 2
         Explanation: The longest substring with no more than '1' distinct characters is "aa".
+    
         Example 3:
-
         Input: String="cbbebi", K=3
         Output: 5
         Explanation: The longest substrings with no more than '3' distinct characters are "cbbeb" & "bbebi".
     */
 
     private static void solve() {
-        String s = "araaci";
-        int i = 0, j = 0, k = 1, res = 0;
-        Set<Character> set = new HashSet<>();
+        String s = "cbbebi";
+        int i = 0, j = 0, k = 3, res = 0;
+        Map<Character, Integer> map = new HashMap<>();
 
         while(j < s.length()) {
-            set.add(s.charAt(j++));
+            map.put(s.charAt(j), map.getOrDefault(s.charAt(j), 0) + 1);
 
-            while(set.size() > k) {
-                set.remove(s.charAt(i++));
-                res = Math.max(res, j - i);
+            if(map.size() == k) res = Math.max(res, j - i + 1);
+
+            while(map.size() > k) {
+                int freq = map.getOrDefault(s.charAt(i), 0);
+                if(freq <= 1) {
+                    map.remove(s.charAt(i));
+                } else {
+                    map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) - 1);
+                }
+                i++;
             }
+            j++;
         }
 
         println(res);
