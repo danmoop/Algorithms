@@ -82,8 +82,8 @@ public class Solution {
             if(map.size() == k) res = Math.max(res, j - i + 1);
 
             while(map.size() > k) {
-                int freq = map.getOrDefault(s.charAt(i), 0);
-                if(freq <= 1) {
+                int freq = map.get(s.charAt(i));
+                if(freq == 1) {
                     map.remove(s.charAt(i));
                 } else {
                     map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) - 1);
