@@ -80,12 +80,14 @@ public class Solution {
 
         while (j < s.length()) {
             if(set.contains(s.charAt(j))) {
-                res = Math.max(res, j - i);
-                i = j;
-                set.clear();
+                set.remove(s.charAt(i++));
+            } else {
+                set.add(s.charAt(j++));
             }
 
-            set.add(s.charAt(j++));
+            println(set);
+
+            res = Math.max(res, set.size());
         }
 
         println(res);
