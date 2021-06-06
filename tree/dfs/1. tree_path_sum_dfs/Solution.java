@@ -52,6 +52,11 @@ public class Solution {
         solve();
     }
 
+    /*
+        Given a binary tree and a number ‘S’, 
+        find if the tree has a path from root-to-leaf such that the sum of all the node values of that path equals ‘S’.
+    */
+
     private static void solve() {
         TreeNode root = new TreeNode(12);
         root.left = new TreeNode(7);
