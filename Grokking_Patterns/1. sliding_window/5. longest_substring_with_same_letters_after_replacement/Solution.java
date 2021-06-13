@@ -74,18 +74,20 @@ public class Solution {
 
     private static void solve() {
         String s = "abccde";
+        Map<Character, Integer> map = new HashMap<>();
         int i = 0, j = 0, k = 1, maxLength = 0, res = 0;
-        int[] map = new int[26];
+        
+        while (j < s.length()) {
+            map.put(s.charAt(j), map.getOrDefault(s.charAt(j), 0) + 1);
 
-        while(j < s.length()) {
-            char lastChar = s.charAt(j++);
-            map[lastChar - 'a']++;
-            maxLength = Math.max(maxLength, map[lastChar - 'a']);
+            maxLength = Math.max(maxLength, map.get(s.charAt(j++)));
 
-            if(j - i - maxLength > k) {
-                char firstChar = s.charAt(i);
-                map[firstChar - 'a']--;
-                i++;
+            if (j - i - maxLength > k) {
+                if (map.get(s.charAt(i)) == maxLength) {
+                    maxLength--;
+                }
+
+                map.put(s.charAt(i), map.get(s.charAt(i++)) - 1);
             }
 
             res = Math.max(res, j - i);

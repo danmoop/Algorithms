@@ -114,7 +114,7 @@ public class Solution {
                 return;
             }
 
-            if (j - i>= pattern.length()) {
+            if (j - i >= pattern.length()) {
                 char firstChar = s.charAt(i++);
 
                 if(map.containsKey(firstChar)) {
