@@ -61,39 +61,41 @@ public class Solution {
         pales, pale -> true
         pale, bale -> true
         pale, bake -> false
-        Hints:#23, #97, #130 
     */
 
     private static void solve() {
-        String s1 = sc.ns(), s2 = sc.ns();
-        int[] map = new int[26];
+        String str1 = sc.ns(), str2 = sc.ns();
 
-        String long_s, short_s;
+        if (Math.abs(str1.length() - str2.length()) > 1) {
+            println(false);
+            return;
+        }
+
+        String s1 = str1.length() >= str2.length() ? str1 : str2;
+        String s2 = str2.length() > str1.length() ? str1 : str2;
+        int i = 0, j = 0;
         boolean modified = false;
 
-        if (s1.length() >= s2.length()) {
-            long_s = s1;
-            short_s = s2;
-        } else {
-            long_s = s2;
-            short_s = s1;
-        }
-
-        for (char c: long_s.toCharArray()) {
-            map[c - 'a']++;
-        }
-
-        for (char c: short_s.toCharArray()) {
-            if (map[c - 'a'] == 0 && modified) {
-                println(false);
-                return;
-            } else if (map[c - 'a'] == 0 && !modified) {
+        while (i < s1.length() && j < s2.length()) {
+            if (s1.charAt(i) != s2.charAt(j)) {
+                if (modified) {
+                    println(false);
+                    return;
+                }
                 modified = true;
+
+                if (s1.length() == s2.length()) {
+                    i++;
+                    j++;
+                } else {
+                    i++;
+                }
             } else {
-                map[c - 'a']--;
+                i++;
+                j++;
             }
         }
-
+        
         println(true);
     }
 }
