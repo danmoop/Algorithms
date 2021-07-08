@@ -54,38 +54,30 @@ public class Solution {
 
     /*
         Problem Statement
-        Given a binary tree and a number ‘S’, find all paths from root-to-leaf such that 
-        the sum of all the node values of each path equals ‘S’.
+        Given a binary tree where each node can only have a digit (0-9) value, 
+        each root-to-leaf path will represent a number. Find the total sum of all the numbers represented by all paths.
     */
 
     private static void solve() {
         TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(7);
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(5);
-        root.right = new TreeNode(9);
-        root.right.left = new TreeNode(2);
-        root.right.right = new TreeNode(7);
+        root.left = new TreeNode(0);
+        root.right = new TreeNode(1);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(5);
+        root.left.left = new TreeNode(1);
 
-        List<List<Integer>> paths = new ArrayList<>();
-        List<Integer> list = new ArrayList<>();
-
-        dfs(root, 0, 12, list, paths);
-        println(paths);
+        println(findSum(root, 0));
     }
 
-    private static void dfs(TreeNode tree, int sum, int target, List<Integer> list, List<List<Integer>> paths) {
-        if (tree == null) return;
+    private static int findSum(TreeNode tree, int sum) {
+        if (tree == null) return 0;
+        int newSum = sum * 10 + tree.val;
 
-        list.add(tree.val);
-
-        if (tree.val + sum == target && (tree.left == null && tree.right == null)) {
-            paths.add(new ArrayList<>(list));
+        if (tree.left == null && tree.right == null) {
+            return newSum;
         }
 
-        dfs(tree.left, tree.val + sum, target, list, paths);
-        dfs(tree.right, tree.val + sum, target, list, paths);
-        list.remove(list.size() - 1);
+        return findSum(tree.left, newSum) + findSum(tree.right, newSum);
     }
 
     private static class TreeNode {
@@ -95,6 +87,11 @@ public class Solution {
 
         TreeNode(int val) {
             this.val = val;
+        }
+
+        @Override 
+        public String toString() {
+            return "value: " + val + ", left: " + left + ", right: " + right;
         }
     }
 }
