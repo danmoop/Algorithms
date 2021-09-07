@@ -79,6 +79,7 @@ public class Solution {
         if (rec[node]) return true;
         if (vis[node]) return false;
         rec[node] = true;
+        vis[node] = true;
 
         for (int i = 0; i < graph.get(node).size(); i++) {
             int adj = graph.get(node).get(i);
