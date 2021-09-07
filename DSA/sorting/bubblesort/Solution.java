@@ -51,9 +51,7 @@ public class Solution {
 
         solve();
     }
-
-    // Bubble Sort & Merge Sort
-
+    
     private static void solve() {
         int n = sc.ni();
         int[] arr = new int[n];
@@ -62,8 +60,7 @@ public class Solution {
             arr[i] = (int) Math.round(Math.random() * n);
         }
 
-        // bubbleSort(arr);
-        mergeSort(arr);
+        bubbleSort(arr);
     }
 
     private static void bubbleSort(int[] arr) {
@@ -75,48 +72,6 @@ public class Solution {
                     arr[j + 1] = t;
                 }
             }
-        }
-    }
-
-    private static void mergeSort(int[] arr) {
-        if (arr.length > 1) {
-            int mid = arr.length / 2;
-
-            int[] first = new int[mid];
-            for (int i = 0; i < mid; i++) {
-                first[i] = arr[i];
-            }
-
-            int[] second = new int[arr.length - mid];
-            int k = 0;
-            for (int i = mid; i < arr.length; i++) {
-                second[k++] = arr[i];
-            }
-
-            mergeSort(first);
-            mergeSort(second);
-
-            merge(arr, first, second);
-        }
-    }
-
-    private static void merge(int[] arr, int[] first, int[] second) {
-        int i = 0, j = 0, k = 0;
-
-        while (i < first.length && j < second.length) {
-            if (first[i] >= second[j]) {
-                arr[k++] = second[j++];
-            } else {
-                arr[k++] = first[i++];
-            }
-        }
-
-        while (i < first.length) {
-            arr[k++] = first[i++];
-        }
-
-        while (j < second.length) {
-            arr[k++] = second[j++];
         }
     }
 }

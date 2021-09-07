@@ -56,6 +56,7 @@ public class Solution {
         List<List<Integer>> graph = new ArrayList<>();
         int n = 7;
         boolean[] vis = new boolean[n];
+        boolean[] rec = new boolean[n];
 
         for (int i = 0; i < n; i++) {
             graph.add(new ArrayList<>());
@@ -71,20 +72,20 @@ public class Solution {
             println(i + ": " + graph.get(i));
         }
 
-        println(isCycled(graph, vis, 0));
+        println(isCycled(graph, rec, vis, 0));
     }
 
-    private static boolean isCycled(List<List<Integer>> graph, boolean[] vis, int node) {
+    private static boolean isCycled(List<List<Integer>> graph, boolean[] rec, boolean[] vis, int node) {
+        if (rec[node]) return true;
+        if (vis[node]) return false;
+        rec[node] = true;
+
         for (int i = 0; i < graph.get(node).size(); i++) {
             int adj = graph.get(node).get(i);
-
-            if(vis[adj]) return true;
-
-            vis[adj] = true;
-            if(isCycled(graph, vis, adj)) return true;
-            vis[adj] = false;
+            if (isCycled(graph, rec, vis, adj)) return true;
         }
 
+        rec[node] = false;
         return false;
     }
 }
