@@ -1,0 +1,24 @@
+Online library system. Allows to borrow books to any customer.
+
+#1)
+Use cases:
+    Customer:
+        Any customer can borrow a physical book from the online library system.
+        A customer should return a book before the specified period.
+    Admin:
+        Add new books.
+        Remove books.
+        Change book's category.
+        Give books.
+        Accept returned books.
+        Send a notification to users who are running late on the return deadline
+
+#2) Class diagram
+    Library,
+    Customer,
+    Admin,
+    ShoppingCart
+    Book,
+    BookStatus(enum),
+    BookCondition(enum),
+    Address

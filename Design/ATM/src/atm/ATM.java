@@ -1,5 +1,7 @@
 package atm;
 
+import bank.Address;
+
 public class ATM {
     private int id;
     private Address address;
