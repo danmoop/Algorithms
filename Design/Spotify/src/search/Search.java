@@ -1,3 +1,7 @@
+package search;
+
+import playable.Song;
+
 import java.util.List;
 
 public interface Search {

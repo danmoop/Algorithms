@@ -1,3 +1,8 @@
+package search;
+
+import playable.Song;
+import user.User;
+
 import java.util.List;
 
 public class Playlist {

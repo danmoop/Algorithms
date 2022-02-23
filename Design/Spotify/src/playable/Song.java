@@ -1,36 +1,28 @@
+package playable;
+
+import search.Album;
+import search.Artist;
+
 import java.util.List;
 
-public class Song {
-    private String title;
+public class Song extends Playable {
     private Artist artist;
-    private int duration;
     private int year;
     private Album album;
-    private String lyrics;
     private String image;
     private String genre;
 
-    public Song(String title, Artist artist, int duration, int year, Album album, String lyrics, String image, String genre) {
-        this.title = title;
+    public Song(String title, String lyrics, int duration, Artist artist, int year, Album album, String image, String genre) {
+        super(title, lyrics, duration);
         this.artist = artist;
-        this.duration = duration;
         this.year = year;
         this.album = album;
-        this.lyrics = lyrics;
         this.image = image;
         this.genre = genre;
     }
 
     public List<Song> showSimilar() {
         return null;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Artist getArtist() {
@@ -41,12 +33,12 @@ public class Song {
         this.artist = artist;
     }
 
-    public int getDuration() {
-        return duration;
+    public int getYear() {
+        return year;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public Album getAlbum() {
@@ -55,14 +47,6 @@ public class Song {
 
     public void setAlbum(Album album) {
         this.album = album;
-    }
-
-    public String getLyrics() {
-        return lyrics;
-    }
-
-    public void setLyrics(String lyrics) {
-        this.lyrics = lyrics;
     }
 
     public String getImage() {
@@ -79,13 +63,5 @@ public class Song {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 }

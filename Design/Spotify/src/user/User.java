@@ -1,3 +1,9 @@
+package user;
+
+import playable.Song;
+import search.Artist;
+import search.Playlist;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +18,7 @@ public class User {
     private List<Artist> recentlyPlayed;
     private List<Artist> topArtists;
     private List<Song> topTracks;
+    private List<Song> likedTracks;
     private AccountType accountType;
 
     public User(String username, String password, String email, String photo, AccountType accountType) {
@@ -25,6 +32,7 @@ public class User {
         this.recentlyPlayed = new ArrayList<>();
         this.topArtists = new ArrayList<>();
         this.topTracks = new ArrayList<>();
+        this.likedTracks = new ArrayList<>();
         this.accountType = accountType;
     }
 
@@ -50,6 +58,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public List<Playlist> getPrivatePlaylists() {
@@ -98,6 +114,14 @@ public class User {
 
     public void setTopTracks(List<Song> topTracks) {
         this.topTracks = topTracks;
+    }
+
+    public List<Song> getLikedTracks() {
+        return likedTracks;
+    }
+
+    public void setLikedTracks(List<Song> likedTracks) {
+        this.likedTracks = likedTracks;
     }
 
     public AccountType getAccountType() {

@@ -1,3 +1,5 @@
+package user;
+
 public enum AccountType {
     FREE,
     FAMILY,
