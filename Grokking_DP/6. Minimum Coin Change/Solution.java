@@ -69,40 +69,50 @@ public class Solution {
     }
 
     /*
+        Introduction
+        Given an infinite supply of 'n' coin denominations and a total money amount, we are asked to find 
+        the minimum number of coins needed to make up that amount.
+
+        Example 1:
+
+        Denominations: {1,2,3}
+        Total amount: 5
+        Output: 2
+        Explanation: We need minimum of two coins {2,3} to make a total of '5'
+        Example 2:
+
+        Denominations: {1,2,3}
+        Total amount: 11
+        Output: 4
+        Explanation: We need minimum four coins {2,3,3,3} to make a total of '11'
+
         Problem Statement
-        Given a set of positive numbers, determine if there exists a subset whose sum is equal to a given number 'S'
-
-        Example 1: #
-        Input: {1, 2, 3, 7}, S=6
-        Output: True
-        The given set has a subset whose sum is '6': {1, 2, 3}
-
-        Example 2: #
-        Input: {1, 2, 7, 1, 5}, S=10
-        Output: True
-        The given set has a subset whose sum is '10': {1, 2, 7}
-
-        Example 3: #
-        Input: {1, 3, 4, 8}, S=6
-        Output: False
-        The given set does not have any subset whose sum is equal to '6'.
+        Given a number array to represent different coin denominations and a total amount 'T', 
+        we need to find the minimum number of coins needed to make change for 'T'. 
+        We can assume an infinite supply of coins, therefore, each coin can be chosen multiple times.
     */
 
     private static void solve() {
-        int[] arr = {1, 2, 7, 1, 5};
-        int s = 10;
-        boolean[][] cache = new boolean[arr.length][s + 1];
+        int[] coins = {1, 2, 3};
+        int amount = 11;   
 
-        println(subset(cache, arr, s, 0));
-    }
+        int[][] cache = new int[coins.length + 1][amount + 1];
 
-    static boolean subset(boolean[][] cache, int[] arr, int s, int i) {
-        if (i >= arr.length) return false;
-        if (s == 0) return true;
+        for (int i = 1; i < cache.length; i++) {
+            for (int j = 1; j <= amount; j++) {
+                int a = (int) 1e9;
 
-        if (cache[i][s]) return true;
+                if (j >= coins[i - 1]) {
+                    a = 1 + cache[i][j - coins[i - 1]];
+                }
 
-        if (s >= arr[i] && subset(cache, arr, s - arr[i], i + 1)) return cache[i][s] = true;
-        return cache[i][s] = subset(cache, arr, s, i + 1); 
+                int b = cache[i - 1][j];
+                b = b == 0 ? (int) 1e9 : b;
+
+                cache[i][j] = Math.min(a, b);
+            }
+        }
+
+        println(cache[coins.length][amount]);
     }
 }

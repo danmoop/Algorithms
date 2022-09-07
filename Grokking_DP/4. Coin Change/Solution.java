@@ -69,40 +69,30 @@ public class Solution {
     }
 
     /*
-        Problem Statement
-        Given a set of positive numbers, determine if there exists a subset whose sum is equal to a given number 'S'
-
-        Example 1: #
-        Input: {1, 2, 3, 7}, S=6
-        Output: True
-        The given set has a subset whose sum is '6': {1, 2, 3}
-
-        Example 2: #
-        Input: {1, 2, 7, 1, 5}, S=10
-        Output: True
-        The given set has a subset whose sum is '10': {1, 2, 7}
-
-        Example 3: #
-        Input: {1, 3, 4, 8}, S=6
-        Output: False
-        The given set does not have any subset whose sum is equal to '6'.
+        You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+        Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+        You may assume that you have an infinite number of each kind of coin.
     */
 
     private static void solve() {
-        int[] arr = {1, 2, 7, 1, 5};
-        int s = 10;
-        boolean[][] cache = new boolean[arr.length][s + 1];
+        int[] coins = {2, 5, 3, 6, 21, 13};
+        int amount = 124;
 
-        println(subset(cache, arr, s, 0));
-    }
-
-    static boolean subset(boolean[][] cache, int[] arr, int s, int i) {
-        if (i >= arr.length) return false;
-        if (s == 0) return true;
-
-        if (cache[i][s]) return true;
-
-        if (s >= arr[i] && subset(cache, arr, s - arr[i], i + 1)) return cache[i][s] = true;
-        return cache[i][s] = subset(cache, arr, s, i + 1); 
+        int[] cache = new int[amount + 1];
+        final int max = (int) 1e9;
+        
+        for (int i = 1; i <= amount; i++) {
+            int res = max;
+            
+            for (int j = 0; j < coins.length; j++) {
+                if (i >= coins[j]) {
+                    res = Math.min(res, 1 + cache[i - coins[j]]);
+                }
+            }
+                                                     
+            cache[i] = res;
+        }
+             
+        println(cache[amount] >= max ? -1 : cache[amount]);
     }
 }

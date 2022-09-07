@@ -70,39 +70,42 @@ public class Solution {
 
     /*
         Problem Statement
-        Given a set of positive numbers, determine if there exists a subset whose sum is equal to a given number 'S'
+        Given a rod of length 'n', we are asked to cut the rod and sell the pieces in a way that will maximize the profit. 
+        We are also given the price of every piece of length 'i' where 1 <= i <= n.
 
-        Example 1: #
-        Input: {1, 2, 3, 7}, S=6
-        Output: True
-        The given set has a subset whose sum is '6': {1, 2, 3}
+        Example:
 
-        Example 2: #
-        Input: {1, 2, 7, 1, 5}, S=10
-        Output: True
-        The given set has a subset whose sum is '10': {1, 2, 7}
+        Lengths: [1, 2, 3, 4, 5]
+        Prices: [2, 6, 7, 10, 13]
+        Rod Length: 5
 
-        Example 3: #
-        Input: {1, 3, 4, 8}, S=6
-        Output: False
-        The given set does not have any subset whose sum is equal to '6'.
+        Let’s try different combinations of cutting the rod:
+
+        Five pieces of length 1 => 10 price
+        Two pieces of length 2 and one piece of length 1 => 14 price
+        One piece of length 3 and two pieces of length 1 => 11 price
+        One piece of length 3 and one piece of length 2 => 13 price
+        One piece of length 4 and one piece of length 1 => 12 price
+        One piece of length 5 => 13 price
+
+        This shows that we get the maximum price (14) by cutting the rod into two pieces of length '2' and one piece of length '1'.
     */
 
     private static void solve() {
-        int[] arr = {1, 2, 7, 1, 5};
-        int s = 10;
-        boolean[][] cache = new boolean[arr.length][s + 1];
+        int[] lengths = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] prices = {1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
+        
+        int length = 52;
+        int[] cache = new int[length + 1];
 
-        println(subset(cache, arr, s, 0));
-    }
+        for (int i = 1; i <= length; i++) {
+            for (int j = 0; j < prices.length; j++) {
+                if (i >= lengths[j]) {
+                    cache[i] = Math.max(cache[i], prices[j] + cache[i - lengths[j]]);
+                }
+            }
+        }
 
-    static boolean subset(boolean[][] cache, int[] arr, int s, int i) {
-        if (i >= arr.length) return false;
-        if (s == 0) return true;
-
-        if (cache[i][s]) return true;
-
-        if (s >= arr[i] && subset(cache, arr, s - arr[i], i + 1)) return cache[i][s] = true;
-        return cache[i][s] = subset(cache, arr, s, i + 1); 
+        println(cache[length]);
     }
 }
